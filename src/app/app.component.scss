@@ -16,16 +16,54 @@ $golden: 1.618fr;
     }
     .editor {
       grid-area: editor;
-      background: lemonchiffon;
-      display: flex;
-      flex-direction: column;
+
+      .main {
+        display: flex;
+        flex-direction: column;
+      }
+      .cheat-sheet {
+        display: none;
+        padding: 0 1em;
+
+        dl {
+          dd {
+            margin-top: -1em;
+          }
+        }
+
+      }
+      &.cheat-sheet-open {
+        display: grid;
+        grid-template-areas: "main cheatsheet";
+        grid-template-columns: $golden 1fr;
+
+        .main {
+          grid-area: main;
+        }
+        .cheat-sheet {
+          grid-area: cheatsheet;
+          display: block;
+        }
+      }
     }
     .overview {
       grid-area: overview;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
   }
+}
+
+
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
 }

@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const materialModules = [
   MatCardModule,
@@ -21,6 +22,7 @@ const materialModules = [
   MatIconModule,
   MatListModule,
   MatDialogModule,
+  MatTooltipModule,
 ];
 
 import { RegistersViewComponent } from './components/registers-view/registers-view.component';
@@ -29,6 +31,9 @@ import { SnapshotViewComponent } from './components/snapshot-view/snapshot-view.
 import { SnapshotListViewComponent } from './components/snapshot-list-view/snapshot-list-view.component';
 import { HexPipe } from './hex.pipe';
 import { AboutBoxDialog } from './components/about-box/about-box.dialog';
+import { OutputViewComponent } from './components/output-view/output-view.component';
+import { ByteArrayViewComponent } from './components/byte-array-view/byte-array-view.component';
+import { CheatSheetComponent } from './components/cheat-sheet/cheat-sheet.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +43,9 @@ import { AboutBoxDialog } from './components/about-box/about-box.dialog';
     SnapshotViewComponent,
     SnapshotListViewComponent,
     AboutBoxDialog,
+    OutputViewComponent,
+    ByteArrayViewComponent,
+    CheatSheetComponent,
   ],
   imports: [
     BrowserModule,

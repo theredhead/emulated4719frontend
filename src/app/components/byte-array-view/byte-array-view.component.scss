@@ -1,0 +1,35 @@
+:host {
+  * {
+    box-sizing: border-box;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+
+    .limiter {
+      overflow-x: auto;
+      border: solid 1px black;
+      width: 100%;
+
+      .bytes {
+        font-family: monospace;
+        // display: grid;
+        // grid-template-columns: 40px;
+        // grid-auto-flow: column dense;
+        display: flex;
+        flex-direction: row;
+        .byte {
+          width: 40px;
+          height: 40px;
+          padding: .25em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          font-size:large;
+        }
+      }
+    }
+  }
+}

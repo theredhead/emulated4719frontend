@@ -23,6 +23,7 @@
               >
               <ng-container *ngIf="!processor.isRunning; else pauseButtonTpl">
                 <button
+                  [matTooltip]="'Start the processor with the current state'"
                   [disabled]="!processor.canResume && !processor.canStart"
                   mat-button
                   (click)="processor.playPause()"
@@ -32,12 +33,17 @@
                 </button>
               </ng-container>
               <ng-template #pauseButtonTpl>
-                <button mat-button (click)="processor.playPause()">
-                  <mat-icon>play_arrow</mat-icon>
-                  <mat-label>Start</mat-label>
+                <button
+                  mat-button
+                  (click)="processor.playPause()"
+                  [matTooltip]="'Pause the processor'"
+                >
+                  <mat-icon>pause</mat-icon>
+                  <mat-label>Pause</mat-label>
                 </button>
               </ng-template>
               <button
+                [matTooltip]="'Stop the processor'"
                 [disabled]="!processor.isRunning"
                 mat-button
                 (click)="processor.stop()"
@@ -47,23 +53,26 @@
               </button>
             </div>
 
-            <button mat-icon-button (click)="processor.bell()">
-              <mat-icon>bell</mat-icon>
-            </button>
-
-            <div>
-              Speed:
+            <div [matTooltip]="speedTooltipText">
+              Delay:
               <input
                 type="range"
-                min="1"
+                min="0"
+                step="50"
                 max="10000"
                 [(ngModel)]="processor.delayBetweenInstructions"
               />
-              {{ processor.delayBetweenInstructions }}
             </div>
 
             <div style="flex: 1 1 auto"></div>
-            <button mat-button (click)="processor.reset()" color="warn">
+            <button
+              [matTooltip]="
+                'Reset the processor, clearing memory and registers'
+              "
+              mat-button
+              (click)="processor.reset()"
+              color="warn"
+            >
               <mat-icon>restart_alt</mat-icon>
               <mat-label>Reset</mat-label>
             </button>
@@ -71,39 +80,79 @@
         </mat-toolbar>
       </div>
 
-      <div class="editor">
-        <textarea rows="16" [(ngModel)]="source"></textarea>
+      <div class="editor" [class.cheat-sheet-open]="showCheatSheet">
+        <div class="main">
+          <div class="vertical">
+            <h1>Code editor</h1>
+            <textarea
+              style="font-size: 1.2rem; font-family: monospace"
+              #sourceCode
+              rows="10"
+              [(ngModel)]="source"
+            ></textarea>
+            <mat-toolbar>
+              <button
+                mat-button
+                (click)="go(sourceCode.value)"
+                [matTooltip]="
+                  'Compile your code, upload and run it in one click'
+                "
+              >
+                <mat-icon>directions_run</mat-icon>
+                Go
+              </button>
+              <!-- <button mat-button>
+                <mat-icon>construction</mat-icon>
+                Compile
+              </button> -->
 
-        <pre>{{ tokenized.join() }}</pre>
+              <button
+                mat-button
+                (click)="downloadMemoryToEditor()"
+                [matTooltip]="'download and decompile the memory'"
+              >
+                <mat-icon>arrow_circle_down</mat-icon>
+                Download
+              </button>
+              <button
+                mat-button
+                (click)="uploadEditorToMemory()"
+                [matTooltip]="'compile the code and upload it to memory'"
+              >
+                <mat-icon>arrow_circle_up</mat-icon>
+                Upload
+              </button>
 
-        <pre>{{ decompiled }}</pre>
+              <div style="flex: 1 1 auto"></div>
+              <button
+                mat-icon-button
+                [matTooltip]="'Show the cheat-sheet'"
+                (click)="showCheatSheet = !showCheatSheet"
+                [color]="showCheatSheet ? 'accent' : 'primary'"
+              >
+                <mat-icon>help</mat-icon>
+              </button>
+            </mat-toolbar>
+            <br />
+            <app-output-view></app-output-view>
 
+            <!-- <pre>{{ compiled.join() }}</pre>
+            <pre>{{ decompiled }}</pre> -->
+          </div>
+          <br />
+        </div>
         <div class="cheat-sheet">
-          <dl>
-            <dd></dd>
-          </dl>
+          <app-cheat-sheet
+            (loadExample)="loadExample($event)"
+          ></app-cheat-sheet>
         </div>
       </div>
       <div class="overview">
         <app-snapshot-view [snapshot]="processor.snapshot"></app-snapshot-view>
 
-        <div class="output">
-          Output:
-          <pre>{{ processor.output }}</pre>
-          <div>
-            Processor is:
-            <ng-container [ngSwitch]="processor.state">
-              <p *ngSwitchCase="stateOptions.CRASHED">CRASHED</p>
-              <p *ngSwitchCase="stateOptions.HALTED">HALTED</p>
-              <p *ngSwitchCase="stateOptions.OFF">OFF</p>
-              <p *ngSwitchCase="stateOptions.RUNNING">RUNNING</p>
-              <p *ngSwitchDefault>UNKNOWN!</p>
-            </ng-container>
-          </div>
-        </div>
-
         <app-snapshot-list-view
           [history]="processor.history"
+          (restore)="restoreFrame($event)"
         ></app-snapshot-list-view>
       </div>
     </main>

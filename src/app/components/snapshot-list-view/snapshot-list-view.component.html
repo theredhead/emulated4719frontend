@@ -11,7 +11,7 @@
         <app-registers-view [registers]="frame.registers"></app-registers-view>
         <!-- <app-memory-view [memory]="frame.memory"></app-memory-view> -->
 
-        <button mat-button (click)="restore(frame)">Restore</button>
+        <button mat-button (click)="restore.emit(frame)">Restore</button>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

@@ -1,0 +1,84 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cheat sheet</mat-card-title>
+    <mat-card-subtitle>Usage and opcodes</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Use the code editor to type opcodes or load one of the example programs.
+      Hover over buttons to see what they do.
+    </p>
+
+    <strong id="examples">Examples</strong>
+    <mat-list>
+      <button
+        mat-button
+        (click)="loadExample.emit('hello-world')"
+        [matTooltip]="'A simple `Hello, World!`'"
+      >
+        Hello, World!
+      </button>
+      <button
+        mat-button
+        (click)="loadExample.emit('lecture-3')"
+        [matTooltip]="'The program created during lecture 3'"
+      >
+        Lecture 3
+      </button>
+    </mat-list>
+
+    <strong>opcodes</strong>
+    <dl>
+      <h5>1 byte instructions</h5>
+      <dt>halt</dt>
+      <dd>halts the processor</dd>
+
+      <dt>add</dt>
+      <dd>R0 = R0 + r1</dd>
+
+      <dt>sub</dt>
+      <dd>R0 = R0 - R1</dd>
+
+      <dt>inc0</dt>
+      <dd>R0 = R0 + 1</dd>
+
+      <dt>inc1</dt>
+      <dd>R1 = R1 + 1</dd>
+
+      <dt>dec0</dt>
+      <dd>R0 = R0 -1</dd>
+
+      <dt>dec1</dt>
+      <dd>R1 = R1 - 1</dd>
+
+      <dt>bell</dt>
+      <dd>Ring a bell</dd>
+
+      <h5>2 byte instructions</h5>
+
+      <dt>prn</dt>
+      <dd>Print the value in the next byte</dd>
+
+      <dt>ld0</dt>
+      <dd>Load the value of the next byte into R0</dd>
+
+      <dt>ll1</dt>
+      <dd>Load the value of the next byte into R1</dd>
+
+      <dt>st0</dt>
+      <dd>Store the value of R0 into the address stored in the next byte</dd>
+
+      <dt>st1</dt>
+      <dd>Store the value of R1 into the address stored in the next byte</dd>
+
+      <dt>jmp</dt>
+      <dd>Jump to the address pointed to by SS</dd>
+
+      <dt>jz</dt>
+      <dd>Jump to the address stored in the next byte</dd>
+
+      <dt>jnz</dt>
+      <dd>Jump to the address stored in the next byte</dd>
+    </dl>
+  </mat-card-content>
+</mat-card>

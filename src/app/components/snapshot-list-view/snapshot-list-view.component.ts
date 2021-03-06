@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EmulatorSnapshot } from '@theredhead/emulated4719';
 
 @Component({
@@ -8,6 +8,7 @@ import { EmulatorSnapshot } from '@theredhead/emulated4719';
 })
 export class SnapshotListViewComponent implements OnInit {
   @Input() history: EmulatorSnapshot[];
+  @Output() restore = new EventEmitter<EmulatorSnapshot>();
 
   constructor() {}
 

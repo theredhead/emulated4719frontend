@@ -1,0 +1,14 @@
+{{ bytes.length }} bytes of output.
+
+<div class="wrapper">
+  <div class="limiter">
+    <div class="bytes horizontal">
+      <div class="byte" *ngFor="let byte of bytes">
+        {{ byte }}
+      </div>
+    </div>
+  </div>
+  <button mat-button color="warn" (click)="bytes = []">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>

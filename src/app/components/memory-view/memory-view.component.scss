@@ -1,0 +1,32 @@
+$cellWidth: 4em;
+$cellHeight: 3em;
+$gap: .5em;
+
+$color: rgb(160, 185, 221);
+$highlight: rgb(160, 221, 105);
+
+:host {
+  display: grid;
+  width: $cellWidth * 4;
+  height: $cellHeight * 4;
+  box-sizing: border-box;
+  border: solid $gap darken($color, 30%);
+  .memory {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: $gap;
+    background: darken($color, 30%);
+    .byte {
+      background: $color;
+      &.highlight {
+        background: $highlight;
+      }
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}

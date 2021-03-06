@@ -1,0 +1,42 @@
+<div class="registers">
+  <div
+    class="register"
+    (mouseenter)="mouseEnter(registerNames.IP)"
+    (mouseleave)="mouseLeave(registerNames.IP)"
+  >
+    <strong>IP</strong>
+    <span>
+      {{ registers.ip | hex }}
+    </span>
+  </div>
+  <div
+    class="register"
+    (mouseenter)="mouseEnter(registerNames.SS)"
+    (mouseleave)="mouseLeave(registerNames.SS)"
+  >
+    <strong>SS</strong>
+    <span>
+      {{ registers.ss | hex }}
+    </span>
+  </div>
+  <div
+    class="register"
+    (mouseenter)="mouseEnter(registerNames.R0)"
+    (mouseleave)="mouseLeave(registerNames.R0)"
+  >
+    <strong>R0</strong>
+    <span>
+      {{ registers.r0 | hex }}
+    </span>
+  </div>
+  <div
+    class="register"
+    (mouseenter)="mouseEnter(registerNames.R1)"
+    (mouseleave)="mouseLeave(registerNames.R1)"
+  >
+    <strong>R1</strong>
+    <span>
+      {{ registers.r1 | hex }}
+    </span>
+  </div>
+</div>

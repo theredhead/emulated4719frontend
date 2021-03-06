@@ -1,0 +1,33 @@
+$cellWidth: 4em;
+$cellHeight: 3.2em;
+$gap: .5em;
+$color: rgb(160, 185, 221);
+
+:host {
+
+  .registers {
+    display: grid;
+    width: $cellWidth * 4;
+    height: $cellHeight + $gap;
+    box-sizing: border-box;
+    border: solid $gap darken($color, 30%);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: $gap;
+    background: darken($color, 30%);
+
+    .register {
+      background: $color;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      strong {
+        display: block;
+      }
+      span {
+        display: block;
+      }
+    }
+  }
+}

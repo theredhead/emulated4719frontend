@@ -1,0 +1,8 @@
+.historic-registers {
+  font-size: .75em;
+  ::ng-deep {
+    strong {
+      display: none !important;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+$golden: 1.618fr;
+
+:host {
+  main {
+    display: flex;
+    flex-direction: column;
+    // grid-template-areas: "interaction overvoew";
+    // grid-template-rows: $golden 1fr;
+    gap: 1em;
+
+    .interaction {
+      border: solid 2px gray
+    }
+    .overview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: solid 2px gray
+    }
+  }
+}

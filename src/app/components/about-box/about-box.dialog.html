@@ -1,0 +1,56 @@
+<h1 mat-dialog-title>About this frontend</h1>
+<div mat-dialog-content>
+  <div>
+    <mat-card-subtitle>Some information about this sotware</mat-card-subtitle>
+  </div>
+  <div>
+    <p>
+      The 4719 is a (fictional) processor that was introduced to me by a man
+      I've never met;
+      <a data-href="https://twitter.com/ProfBuckland" (click)="openLink($event)"
+        >Richard Buckland</a
+      >. I have no idea about the history of the CPU.
+    </p>
+    <p>
+      Some years ago, probably 2017 or so, while browsing iTunes U, I came
+      across a UNSW course that grabbed my interest.
+      <a
+        data-href="https://wiki.cse.unsw.edu.au/info/COMP1917"
+        (click)="openLink($event)"
+        >COMP1917</a
+      >. The UNSW had been so amizingly cool as to make videos of their lectures
+      widely available. In some of the earlier lectures the fictional processor
+      makes its' debut.
+    </p>
+    <p>This web application simulates that cpu.</p>
+    <p>Thank you Richard Buckland and UNSW</p>
+    <mat-divider></mat-divider>
+    <p>This software is freely available.</p>
+    <dl>
+      <dt>@theredhead/emulated4719 on npm</dt>
+      <dd>
+        <a
+          data-href="https://www.npmjs.com/package/@theredhead/emulated4719"
+          (click)="openLink($event)"
+          >https://www.npmjs.com/package/@theredhead/emulated4719</a
+        >
+      </dd>
+      <dt>@theredhead/emulated4719 source</dt>
+      <dd>
+        <a
+          data-href="https://github.com/theredhead/emulated4719"
+          (click)="openLink($event)"
+          >https://github.com/theredhead/emulated4719</a
+        >
+      </dd>
+      <dt>emulated4719frontend source</dt>
+      <dd>
+        <a
+          data-href="https://github.com/theredhead/emulated4719"
+          (click)="openLink($event)"
+          >https://github.com/theredhead/emulated4719frontend</a
+        >
+      </dd>
+    </dl>
+  </div>
+</div>

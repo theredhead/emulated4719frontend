@@ -1,0 +1,18 @@
+<mat-card class="history">
+  <mat-card-header>
+    <mat-card-title> History </mat-card-title>
+    <mat-card-subtitle>
+      Registers and memory at previous states
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let frame of history" class="historic-registers">
+        <app-registers-view [registers]="frame.registers"></app-registers-view>
+        <!-- <app-memory-view [memory]="frame.memory"></app-memory-view> -->
+
+        <button mat-button (click)="restore(frame)">Restore</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

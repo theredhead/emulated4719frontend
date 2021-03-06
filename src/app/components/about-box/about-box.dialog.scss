@@ -1,0 +1,7 @@
+:host {
+  a[data-href] {
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+}

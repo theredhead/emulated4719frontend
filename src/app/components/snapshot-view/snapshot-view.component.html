@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Registers and memory: </mat-card-title>
+    <mat-card-subtitle>This is in memory right now</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <app-registers-view [registers]="snapshot.registers"></app-registers-view>
+    <br />
+    <app-memory-view
+      [highlight]="highlight"
+      [memory]="snapshot.memory"
+    ></app-memory-view>
+  </mat-card-content>
+</mat-card>

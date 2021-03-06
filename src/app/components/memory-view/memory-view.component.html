@@ -1,0 +1,17 @@
+<div class="memory">
+  <div
+    *ngFor="let value of memory; let ix = index"
+    class="byte"
+    [class.highlight]="highlight == ix"
+    title="Address: #{{ ix }}"
+  >
+    {{ value | hex }}
+  </div>
+</div>
+<!--
+<table>
+  <tr *ngFor="let v of memory; let ix = index">
+    <th>{{ ix }}</th>
+    <td><input type="text" [(ngModel)]="memory[ix]" /> {{ v }}</td>
+  </tr>
+</table> -->

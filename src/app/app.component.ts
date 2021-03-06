@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Processor, ProcessorState, Registers } from '@theredhead/emulated4719';
+import {
+  compile,
+  decompile,
+  Processor,
+  ProcessorState,
+  Registers,
+  tokenize,
+} from '@theredhead/emulated4719';
 import { AboutBoxDialog } from './components/about-box/about-box.dialog';
 @Component({
   selector: 'app-root',
@@ -9,6 +16,20 @@ import { AboutBoxDialog } from './components/about-box/about-box.dialog';
 })
 export class AppComponent {
   title = 'app';
+
+  source: string = '';
+
+  get compiled(): number[] {
+    return compile(this.source);
+  }
+  get tokenized(): string[] {
+    return tokenize(this.source);
+  }
+
+  get decompiled(): string {
+    const bytes = this.processor.memory.toByteArray();
+    return decompile(bytes);
+  }
 
   readonly processor = new Processor();
   readonly stateOptions = ProcessorState;

@@ -9,83 +9,98 @@
 <mat-card>
   <mat-card-content>
     <main>
-      <mat-toolbar>
-        <mat-toolbar-row>
-          <div class="play-pause">
-            <code
-              style="margin: 0.25em; padding: 0.25em; outline: solid 1px black"
-              >{{ stateOptions[processor.state] }}</code
-            >
-            <ng-container *ngIf="!processor.isRunning; else pauseButtonTpl">
-              <button
-                [disabled]="!processor.canResume && !processor.canStart"
-                mat-button
-                (click)="processor.playPause()"
+      <div class="toolbar">
+        <mat-toolbar>
+          <mat-toolbar-row>
+            <div class="play-pause">
+              <code
+                style="
+                  margin: 0.25em;
+                  padding: 0.25em;
+                  outline: solid 1px black;
+                "
+                >{{ stateOptions[processor.state] }}</code
               >
-                <mat-icon>play_arrow</mat-icon>
-                <mat-label>Start</mat-label>
+              <ng-container *ngIf="!processor.isRunning; else pauseButtonTpl">
+                <button
+                  [disabled]="!processor.canResume && !processor.canStart"
+                  mat-button
+                  (click)="processor.playPause()"
+                >
+                  <mat-icon>play_arrow</mat-icon>
+                  <mat-label>Start</mat-label>
+                </button>
+              </ng-container>
+              <ng-template #pauseButtonTpl>
+                <button mat-button (click)="processor.playPause()">
+                  <mat-icon>play_arrow</mat-icon>
+                  <mat-label>Start</mat-label>
+                </button>
+              </ng-template>
+              <button
+                [disabled]="!processor.isRunning"
+                mat-button
+                (click)="processor.stop()"
+              >
+                <mat-icon>stop</mat-icon>
+                <mat-label>stop</mat-label>
               </button>
-            </ng-container>
-            <ng-template #pauseButtonTpl>
-              <button mat-button (click)="processor.playPause()">
-                <mat-icon>play_arrow</mat-icon>
-                <mat-label>Start</mat-label>
-              </button>
-            </ng-template>
-            <button
-              [disabled]="!processor.isRunning"
-              mat-button
-              (click)="processor.stop()"
-            >
-              <mat-icon>stop</mat-icon>
-              <mat-label>stop</mat-label>
-            </button>
-          </div>
-
-          <button mat-icon-button (click)="processor.bell()">
-            <mat-icon>bell</mat-icon>
-          </button>
-
-          <div>
-            Speed:
-            <input
-              type="range"
-              min="1"
-              max="10000"
-              [(ngModel)]="processor.delayBetweenInstructions"
-            />
-            {{ processor.delayBetweenInstructions }}
-          </div>
-
-          <div style="flex: 1 1 auto"></div>
-          <button mat-button (click)="processor.reset()" color="warn">
-            <mat-icon>restart_alt</mat-icon>
-            <mat-label>Reset</mat-label>
-          </button>
-        </mat-toolbar-row>
-      </mat-toolbar>
-      <div class="interaction">
-        <mat-card>
-          <mat-card-content>
-            <div class="output">
-              Output:
-              <pre>{{ processor.output }}</pre>
-              <div>
-                Processor is:
-                <ng-container [ngSwitch]="processor.state">
-                  <p *ngSwitchCase="stateOptions.CRASHED">CRASHED</p>
-                  <p *ngSwitchCase="stateOptions.HALTED">HALTED</p>
-                  <p *ngSwitchCase="stateOptions.OFF">OFF</p>
-                  <p *ngSwitchCase="stateOptions.RUNNING">RUNNING</p>
-                  <p *ngSwitchDefault>UNKNOWN!</p>
-                </ng-container>
-              </div>
             </div>
-          </mat-card-content>
-        </mat-card>
+
+            <button mat-icon-button (click)="processor.bell()">
+              <mat-icon>bell</mat-icon>
+            </button>
+
+            <div>
+              Speed:
+              <input
+                type="range"
+                min="1"
+                max="10000"
+                [(ngModel)]="processor.delayBetweenInstructions"
+              />
+              {{ processor.delayBetweenInstructions }}
+            </div>
+
+            <div style="flex: 1 1 auto"></div>
+            <button mat-button (click)="processor.reset()" color="warn">
+              <mat-icon>restart_alt</mat-icon>
+              <mat-label>Reset</mat-label>
+            </button>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+
+      <div class="editor">
+        <textarea rows="16" [(ngModel)]="source"></textarea>
+
+        <pre>{{ tokenized.join() }}</pre>
+
+        <pre>{{ decompiled }}</pre>
+
+        <div class="cheat-sheet">
+          <dl>
+            <dd></dd>
+          </dl>
+        </div>
       </div>
       <div class="overview">
         <app-snapshot-view [snapshot]="processor.snapshot"></app-snapshot-view>
+
+        <div class="output">
+          Output:
+          <pre>{{ processor.output }}</pre>
+          <div>
+            Processor is:
+            <ng-container [ngSwitch]="processor.state">
+              <p *ngSwitchCase="stateOptions.CRASHED">CRASHED</p>
+              <p *ngSwitchCase="stateOptions.HALTED">HALTED</p>
+              <p *ngSwitchCase="stateOptions.OFF">OFF</p>
+              <p *ngSwitchCase="stateOptions.RUNNING">RUNNING</p>
+              <p *ngSwitchDefault>UNKNOWN!</p>
+            </ng-container>
+          </div>
+        </div>
 
         <app-snapshot-list-view
           [history]="processor.history"

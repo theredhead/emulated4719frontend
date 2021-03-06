@@ -1,4 +1,19 @@
 :host {
+  display: grid;
+  grid-template-areas: "title" "main";
+  grid-auto-rows: 80px 1fr;
+  height: 100%;
+  gap: 1em;
+
+  .title {
+    grid-area: "title";
+  }
+
+  .main {
+    grid-area: "main";
+    overflow-y: auto;
+  }
+
   a[data-href] {
     cursor: pointer;
     text-decoration: underline;
